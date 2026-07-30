@@ -4,8 +4,7 @@ class Scanner:
     def scan (self):
         active_providers=[]
         for provider in SUPPORTED_PROVIDERS:
-            if provider.detect():
-                active_providers.append(provider)
+            provider_info = provider.detect()
+            if provider_info:
+                active_providers.append(provider_info)
         return active_providers
-scannerTemp= Scanner()
-print(scannerTemp.scan())

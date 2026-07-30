@@ -12,7 +12,8 @@ class OllamaProvider(BaseProvider):
 
             return ProviderInfo(
                 name="Ollama",
-                models=self.get_models(data)
+                loadedModels=self.get_loaded_models(),
+                installedModels=self.get_models(data)
             )
 
         except requests.exceptions.RequestException:
@@ -22,7 +23,10 @@ class OllamaProvider(BaseProvider):
         for models in data["models"]:
             model_lists.append(models["name"])
         return model_lists
-            
+    def get_loaded_models(self):
+        response=requests.get("http://127.0.0.1:11434/api/ps")
+        model_loaded=response.json()
+        return model_loaded["models"][0]["name"]
 
 """ 
 provider=OllamaProvider()
