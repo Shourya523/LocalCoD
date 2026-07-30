@@ -11,3 +11,7 @@ class BaseProvider(ABC):
     @abstractmethod
     def generate(self,request):
         pass
+    @abstractmethod
+    def complete(self, request):
+        """Generates a code completion based on a CompletionRequest."""
+        pass

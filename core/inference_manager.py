@@ -14,3 +14,14 @@ class InferenceManager:
                 return detected.provider.generate(request)
 
         raise Exception(f"Model '{request.model}' not found.")
+
+    def complete(self, request):
+
+        detected_providers = self.scanner.scan()
+
+        for detected in detected_providers:
+
+            if request.model in detected.info.installedModels:
+                return detected.provider.complete(request)
+
+        raise Exception(f"Model '{request.model}' not found.")
