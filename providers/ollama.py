@@ -26,7 +26,10 @@ class OllamaProvider(BaseProvider):
     def get_loaded_models(self):
         response=requests.get("http://127.0.0.1:11434/api/ps")
         model_loaded=response.json()
-        return model_loaded["models"][0]["name"]
+        loaded_models = []
+        for model in model_loaded["models"]:
+            loaded_models.append(model["name"])
+        return loaded_models
 
 """ 
 provider=OllamaProvider()
