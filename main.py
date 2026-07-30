@@ -53,14 +53,19 @@ public:
 
 """
 
+from utils.language_detector import detect_language
+
 cursor_position = len(target_prefix)
+filename = "solution.cpp"
+detected_lang = detect_language(filename)
 
 request = CompletionRequest(
     model="Qwen2.5-Coder:latest",
     file_content=cpp_code,
     cursor_position=cursor_position,
-    language="cpp"
+    language=detected_lang
 )
+
 
 print("=== Running C++ Code Completion ===")
 response = manager.complete(request)
