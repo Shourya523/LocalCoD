@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod ##abstract base classes : anyone inheriting 
 class BaseProvider(ABC):
     @abstractmethod ##decorator ; This function must be implemented by every child class.
     def detect(self):
+        """Returns a ProviderInfo if detected, otherwise None."""
         pass
     @abstractmethod
     def get_models(self):
