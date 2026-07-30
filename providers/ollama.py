@@ -1,6 +1,7 @@
 from providers.base import BaseProvider ## implement the abstract class from base providers file to here
 import requests
 from models.provider_info import ProviderInfo
+from models.generation_response import GenerationResponse
 
 
 class OllamaProvider(BaseProvider):
@@ -30,10 +31,16 @@ class OllamaProvider(BaseProvider):
         for model in model_loaded["models"]:
             loaded_models.append(model["name"])
         return loaded_models
-
-""" 
-provider=OllamaProvider()
-print(provider.detect())
-print(provider.get_models()) 
-
-"""
+    def generate(self, model, prompt):
+        response = requests.post(
+            "http://127.0.0.1:11434/api/generate",
+            json={
+                "model": model,
+                "prompt": prompt,
+                "stream": False
+            }
+        )
+        return GenerationResponse(
+            text=response.json()["response"]
+        )
+        
