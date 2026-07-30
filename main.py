@@ -1,5 +1,10 @@
-from discovery.scanner import Scanner
+from core.inference_manager import InferenceManager
 
-scanner = Scanner()
+manager = InferenceManager()
 
-print(scanner.scan())
+response = manager.generate(
+    model="batiai/gemma4-26b:latest",
+    prompt="Tell me a joke."
+)
+
+print(response.text)
