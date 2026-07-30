@@ -31,13 +31,14 @@ class OllamaProvider(BaseProvider):
         for model in model_loaded["models"]:
             loaded_models.append(model["name"])
         return loaded_models
-    def generate(self, model, prompt):
+    def generate(self, request):
         response = requests.post(
             "http://127.0.0.1:11434/api/generate",
             json={
-                "model": model,
-                "prompt": prompt,
-                "stream": False
+                "model": request.model,
+                "prompt": request.prompt,
+                "temperature": request.temperature,
+                "stream": request.stream
             }
         )
         return GenerationResponse(

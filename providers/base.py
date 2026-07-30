@@ -9,5 +9,5 @@ class BaseProvider(ABC):
     def get_models(self):
         pass
     @abstractmethod
-    def generate(self, model, prompt):
+    def generate(self,request):
         pass
